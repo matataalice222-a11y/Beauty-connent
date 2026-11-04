@@ -19,4 +19,4 @@ RUN pip install --no-cache-dir -r backend/requirements.txt
 COPY backend/ ./backend/
 COPY --from=frontend-build /app/frontend/dist ./frontend/dist
 
-CMD ["sh", "-c", "gunicorn --chdir backend --bind 0.0.0.0:${PORT} app:app"]
+CMD ["sh", "-c", "gunicorn --chdir backend --bind 0.0.0.0:${PORT} legacy_cli:app"]
