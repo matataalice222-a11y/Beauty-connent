@@ -3,8 +3,11 @@ import importlib.util
 import sys
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 app_path = Path(__file__).with_name("app.py")
 project_root = app_path.parent.parent
+load_dotenv(project_root / ".env")
 database_url = os.environ.get("DATABASE_URL", "sqlite:///glamride.db")
 if database_url.startswith("sqlite:///"):
     database_path = Path(database_url.removeprefix("sqlite:///"))

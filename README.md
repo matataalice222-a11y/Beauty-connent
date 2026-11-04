@@ -16,15 +16,21 @@ From the project directory, create and activate a virtual environment, then run:
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r backend\requirements.txt
-python backend\app.py
+python backend\run.py
 ```
 
 The API starts at `http://127.0.0.1:5000`. It creates and seeds
 `instance\glamride.db` on first run.
 
-Set a long, unique `FLASK_SECRET_KEY` environment variable before deploying;
-without one, a new random key is generated when the app starts, so existing
-sessions are signed out after a restart. When deploying behind HTTPS, also set
+The backend loads configuration from the project-root `.env` file. Copy
+`.env.example` to `.env` to customize settings. By default, `DATABASE_URL` uses
+a local SQLite database. To use PostgreSQL, set it to a PostgreSQL connection
+URL; the PostgreSQL driver is installed from `backend\requirements.txt`. Keep
+`.env` private and never commit database credentials.
+
+Set a long, unique `FLASK_SECRET_KEY` in `.env` before deploying; without one,
+a new random key is generated when the app starts, so existing sessions are
+signed out after a restart. When deploying behind HTTPS, also set
 `SESSION_COOKIE_SECURE=1`.
 Create the first administrator interactively from the project directory:
 

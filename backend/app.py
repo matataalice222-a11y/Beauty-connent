@@ -3,12 +3,17 @@ import re
 from datetime import datetime, timedelta
 from functools import wraps
 from math import asin, cos, radians, sin, sqrt
+from pathlib import Path
 
 import click
+from dotenv import load_dotenv
 from flask import Flask, jsonify, request, session
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func, inspect, text
 from werkzeug.security import check_password_hash, generate_password_hash
+
+if __name__ == "__main__":
+    load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 
 db = SQLAlchemy()
 
@@ -416,10 +421,20 @@ def upgrade_schema():
 
 
 def create_app(test_config=None):
+    database_url = os.environ.get("DATABASE_URL", "sqlite:///glamride.db")
+    if database_url.startswith("postgres://"):
+        database_url = database_url.replace(
+            "postgres://", "postgresql+psycopg://", 1
+        )
+    elif database_url.startswith("postgresql://"):
+        database_url = database_url.replace(
+            "postgresql://", "postgresql+psycopg://", 1
+        )
+
     app = Flask(__name__)
     app.config.update(
         SECRET_KEY=os.environ.get("FLASK_SECRET_KEY") or os.urandom(32),
-        SQLALCHEMY_DATABASE_URI=os.environ.get("DATABASE_URL", "sqlite:///glamride.db"),
+        SQLALCHEMY_DATABASE_URI=database_url,
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         SESSION_COOKIE_HTTPONLY=True,
         SESSION_COOKIE_SAMESITE="Lax",
