@@ -50,6 +50,43 @@ displaying the password:
 flask --app backend/legacy_cli.py reset-admin-password
 ```
 
+## Deploy to Render
+
+The Render Docker service builds the React app and serves it from the Flask
+backend, so the UI and API share one origin and session cookies work without
+cross-origin configuration.
+
+1. Push this repository to GitHub and sign in to [Render](https://render.com/).
+2. In Render, create a managed PostgreSQL database. Choose a region and plan,
+   then wait until the database is available.
+3. Create a new **Web Service** and connect
+   `matataalice222-a11y/Beauty-connent`, branch `main`. Select the **Docker**
+   runtime and use the same region as the database. Leave the root directory
+   blank so Render finds the root `Dockerfile`. Set its health check path to
+   `/api/health`.
+4. In the web service's **Environment** settings, add:
+   - `DATABASE_URL`: use the PostgreSQL database's **internal** connection
+     string from Render. Do not use the local `.env` value.
+   - `FLASK_SECRET_KEY`: generate a long, unique random value.
+   - `SESSION_COOKIE_SECURE`: `1`.
+   - `ADMIN_EMAIL` and `ADMIN_PASSWORD`: optional; set both temporarily if you
+     want the first administrator created on deploy. Use a unique production
+     password. Remove these variables after the admin account is created; its
+     password hash remains in the database.
+5. Choose a plan for the web service and create it. Watch the deploy logs for
+   the Docker build and application startup to complete.
+6. Open `https://<your-service>.onrender.com/api/health`. A healthy response
+   includes `"status":"ok"` and `"database":"ok"`. Then open the service's
+   root URL to check the frontend.
+7. Test customer registration, sign-in, and sign-out. If you did not seed an
+   admin in step 4, create one from the Render Shell with
+   `flask --app backend/legacy_cli.py create-admin`, then remove any temporary
+   admin environment variables and redeploy.
+
+Keep database and admin credentials in Render's environment settings, not in
+GitHub or chat. The app's demo payment flow does not charge money or connect to
+a payment provider.
+
 ### React app
 
 In a second terminal:

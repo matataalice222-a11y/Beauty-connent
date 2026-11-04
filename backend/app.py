@@ -7,7 +7,7 @@ from pathlib import Path
 
 import click
 from dotenv import load_dotenv
-from flask import Flask, jsonify, request, session
+from flask import Flask, jsonify, request, send_from_directory, session
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func, inspect, text
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -431,6 +431,7 @@ def create_app(test_config=None):
             "postgresql://", "postgresql+psycopg://", 1
         )
 
+    frontend_dist = Path(__file__).resolve().parents[1] / "frontend" / "dist"
     app = Flask(__name__)
     app.config.update(
         SECRET_KEY=os.environ.get("FLASK_SECRET_KEY") or os.urandom(32),
@@ -444,9 +445,22 @@ def create_app(test_config=None):
         app.config.update(test_config)
     db.init_app(app)
 
+    @app.get("/")
+    def frontend_index():
+        return send_from_directory(frontend_dist, "index.html")
+
+    @app.get("/<path:path>")
+    def frontend_or_static_file(path):
+        if path.startswith("api/"):
+            return _error("Not found.", 404)
+        if (frontend_dist / path).is_file():
+            return send_from_directory(frontend_dist, path)
+        return send_from_directory(frontend_dist, "index.html")
+
     @app.get("/api/health")
     def health():
-        return jsonify({"status": "ok"})
+        db.session.execute(text("SELECT 1"))
+        return jsonify({"status": "ok", "database": "ok"})
 
     @app.get("/api/services")
     def services():
