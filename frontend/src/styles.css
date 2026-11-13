@@ -705,3 +705,47 @@ h2 em,
     transition-duration: .01ms !important;
   }
 }
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  grid-template-columns: minmax(0, 1fr);
+  overflow: hidden;
+  background: #302522;
+}
+.hero-video {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+}
+.hero::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(29 20 19 / 82%) 0%, rgb(29 20 19 / 68%) 48%, rgb(29 20 19 / 34%) 100%);
+  content: "";
+}
+.hero-content { max-width: 720px; }
+.hero .eyebrow { color: #f3c6b7; }
+.hero h1,
+.hero h1 em { color: #fffaf7; }
+.hero h1 em { color: #f1cbbf; }
+.hero-description,
+.hero-note,
+.gps-search-button { color: #fff4ef; }
+.hero .search-bar { background: #fffdfb; }
+.hero .gps-search-button:hover { color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    background: #302522 url("/images/hero-stylist.jpg") center 45% / cover no-repeat;
+  }
+  .hero-video { display: none; }
+  .hero::after {
+    background: linear-gradient(90deg, rgb(29 20 19 / 82%) 0%, rgb(29 20 19 / 68%) 48%, rgb(29 20 19 / 34%) 100%);
+  }
+}

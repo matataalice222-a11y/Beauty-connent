@@ -131,8 +131,12 @@ requests to Flask.
   provider or transfer/charge money.
 - **Beauty services:** braids, wig styling, hair care, makeup, nails, brows and
   lashes, and skin and spa appointments.
-- **Photography:** locally stored stock photographs are illustrative and do not
-  represent the sample stylist profiles or guarantee a particular service result.
+- **Photography and video:** locally stored stock photographs are illustrative
+  and do not represent the sample stylist profiles or guarantee a particular
+  service result. The landing-page salon video is by
+  [Kampus Production on Pexels](https://www.pexels.com/video/hairdresser-cutting-clients-hair-8830244/)
+  and is used under the [Pexels License](https://www.pexels.com/license/). It is
+  externally hosted; a local photo is shown when reduced motion is enabled.
 
 ## API
 

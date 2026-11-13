@@ -1058,6 +1058,22 @@ function App() {
         ) : page === "home" ? (
           <>
             <section className="hero">
+              <video
+                className="hero-video"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="none"
+                poster="/images/hero-stylist.jpg"
+                aria-hidden="true"
+                tabIndex={-1}
+              >
+                <source
+                  src="https://videos.pexels.com/video-files/8830244/8830244-uhd_3840_2160_25fps.mp4"
+                  type="video/mp4"
+                />
+              </video>
               <div className="hero-content">
                 <div className="eyebrow">NAIROBI · KENYA</div>
                 <h1>Find a beauty<br /><em>professional nearby.</em></h1>
@@ -1066,7 +1082,6 @@ function App() {
                 <button className="gps-search-button" onClick={findNearbyStylists} disabled={nearbyBusy}>{nearbyBusy ? "Finding your location…" : "⌖ Use my location to find nearby artists"}</button>
                 <div className="hero-note">Prices in KSh · Home visits and salon appointments</div>
               </div>
-              <div className="hero-photo-wrap"><img className="hero-photo" src="/images/hero-stylist.jpg" alt="A hairstylist caring for a client's hair in a salon" fetchPriority="high" /></div>
             </section>
             <section className="trust-strip" aria-label="Booking information"><span>Independent professionals</span><span>Prices shown in KSh</span><span>Home visits or salon</span><span>Appointment requests confirmed by the artist</span></section>
             <section className="section page-width"><div className="section-heading"><div><span className="eyebrow">SERVICES</span><h2>Browse popular services</h2></div><button className="text-button" onClick={() => navigate("services")}>View all services <span aria-hidden="true">→</span></button></div>
