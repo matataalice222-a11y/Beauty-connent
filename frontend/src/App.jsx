@@ -18,8 +18,46 @@ const stylistPortraits = [
   "/images/stylist-four.jpg",
 ];
 
+const servicePhotosByName = {
+  "acrylic nail extensions": "/images/services/acrylic-nail-extensions.jpg",
+  "blow-dry & style": "/images/services/blow-dry-style.jpg",
+  "bridal makeup": "/images/services/bridal-makeup.jpg",
+  "brow shaping": "/images/services/brow-shaping.jpg",
+  "brow tint": "/images/services/brow-tint.jpg",
+  "classic box braids": "/images/services/classic-box-braids.jpg",
+  cornrows: "/images/services/cornrows.jpg",
+  "crochet braids": "/images/services/crochet-braids.jpg",
+  "event makeup": "/images/services/event-makeup.jpg",
+  "express facial": "/images/services/express-facial.jpg",
+  "face waxing": "/images/services/face-waxing.jpg",
+  "faux locs": "/images/services/faux-locs.jpg",
+  "gel manicure": "/images/services/gel-manicure.jpg",
+  "goddess braids": "/images/services/goddess-braids.jpg",
+  "hair colouring": "/images/services/hair-colouring.jpg",
+  "hair trim": "/images/services/hair-trim.jpg",
+  "knotless braids": "/images/services/knotless-braids.jpg",
+  "lash extensions": "/images/services/lash-extensions.jpg",
+  "lash lift & tint": "/images/services/lash-lift-tint.jpg",
+  "makeup application": "/images/services/makeup-application.jpg",
+  manicure: "/images/services/manicure.jpg",
+  "relaxing facial": "/images/services/relaxing-facial.jpg",
+  "scalp treatment": "/images/services/scalp-treatment.jpg",
+  "silk press": "/images/services/silk-press.jpg",
+  "spa pedicure": "/images/services/spa-pedicure.jpg",
+  "wash & treatment": "/images/services/wash-treatment.jpg",
+  "wig installation": "/images/services/wig-installation.jpg",
+  "wig styling": "/images/services/wig-styling.jpg",
+  "wig wash & revamp": "/images/services/wig-wash-revamp.jpg",
+};
+
 function servicePhoto(service) {
   const name = service.name.toLowerCase();
+  if (Object.hasOwn(servicePhotosByName, name)) {
+    return servicePhotosByName[name];
+  }
+  if (service.image_url) {
+    return service.image_url;
+  }
   if (name.includes("braid") || name.includes("loc") || name.includes("cornrow")) {
     return "/images/service-braids.jpg";
   }
@@ -90,7 +128,7 @@ function getDeviceLocation() {
 function ServiceCard({ service, onBook }) {
   return (
     <article className="service-card">
-      <img className="service-photo" src={service.image_url || servicePhoto(service)} alt={`${service.name} service`} loading="lazy" />
+      <img className="service-photo" src={servicePhoto(service)} alt={`${service.name} service`} loading="lazy" />
       <span className="service-category">{service.category}</span>
       <h3>{service.name}</h3>
       <p>{service.description}</p>
