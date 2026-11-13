@@ -21,18 +21,18 @@ const stylistPortraits = [
 function servicePhoto(service) {
   const name = service.name.toLowerCase();
   if (name.includes("braid") || name.includes("loc") || name.includes("cornrow")) {
-    return "https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=900&q=85";
+    return "/images/service-braids.jpg";
   }
   if (name.includes("nail") || name.includes("manicure") || name.includes("pedicure") || name.includes("acrylic")) {
-    return "https://images.unsplash.com/photo-1610992015732-2449b76344bc?auto=format&fit=crop&w=900&q=85";
+    return "/images/service-nails.jpg";
   }
   if (name.includes("facial") || name.includes("skin") || name.includes("wax")) {
-    return "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=85";
+    return "/images/service-facial.jpg";
   }
   if (name.includes("makeup") || name.includes("lash") || name.includes("brow")) {
-    return "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=900&q=85";
+    return "/images/service-beauty.jpg";
   }
-  return "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=85";
+  return "/images/service-hair.jpg";
 }
 
 async function api(path, options = {}) {
@@ -1021,23 +1021,23 @@ function App() {
           <>
             <section className="hero">
               <div className="hero-content">
-                <div className="eyebrow">YOUR BEAUTY, YOUR WAY</div>
-                <h1>Feel like <em>yourself.</em><br />Only more radiant.</h1>
-                <p className="hero-description">Meet Nairobi’s independent beauty artists and find the right person for your next look.</p>
+                <div className="eyebrow">NAIROBI · KENYA</div>
+                <h1>Find a beauty<br /><em>professional nearby.</em></h1>
+                <p className="hero-description">Compare local services and listed prices, then request an appointment with an independent beauty professional.</p>
                 <form className="search-bar" onSubmit={searchMarketplace}><span className="search-pin" aria-hidden="true">⌕</span><label className="sr-only" htmlFor="marketplace-search">Search services or artists</label><input id="marketplace-search" type="search" required value={searchInput} onChange={(event) => setSearchInput(event.target.value)} placeholder="Search a service, artist, or neighbourhood" /><button type="submit">Search</button></form>
                 <button className="gps-search-button" onClick={findNearbyStylists} disabled={nearbyBusy}>{nearbyBusy ? "Finding your location…" : "⌖ Use my location to find nearby artists"}</button>
-                <div className="hero-note">Independent beauty professionals across Nairobi</div>
+                <div className="hero-note">Prices in KSh · Home visits and salon appointments</div>
               </div>
               <div className="hero-photo-wrap"><img className="hero-photo" src="/images/hero-stylist.jpg" alt="A hairstylist caring for a client's hair in a salon" fetchPriority="high" /></div>
             </section>
-            <section className="trust-strip" aria-label="GlamRide highlights"><span>Curated local artists</span><span>Appointments that fit your schedule</span><span>At home or in salon</span><span>Transparent service prices</span></section>
-            <section className="section page-width"><div className="section-heading"><div><span className="eyebrow">A LITTLE SOMETHING FOR YOU</span><h2>Find your next <em>favourite.</em></h2></div><button className="text-button" onClick={() => navigate("services")}>All services</button></div>
-              {loading ? <div className="loading-state">Finding the lovely things…</div> : <div className="service-grid">{services.slice(0, 4).map((service) => <ServiceCard key={service.id} service={service} onBook={(item) => goToBooking(item)} />)}</div>}
+            <section className="trust-strip" aria-label="Booking information"><span>Independent professionals</span><span>Prices shown in KSh</span><span>Home visits or salon</span><span>Appointment requests confirmed by the artist</span></section>
+            <section className="section page-width"><div className="section-heading"><div><span className="eyebrow">SERVICES</span><h2>Browse popular services</h2></div><button className="text-button" onClick={() => navigate("services")}>View all services <span aria-hidden="true">→</span></button></div>
+              {loading ? <div className="loading-state">Loading services…</div> : <div className="service-grid">{services.slice(0, 4).map((service) => <ServiceCard key={service.id} service={service} onBook={(item) => goToBooking(item)} />)}</div>}
             </section>
-            <section className="artist-section"><div className="page-width"><div className="section-heading"><div><span className="eyebrow">GOOD HANDS, GOOD ENERGY</span><h2>Meet the <em>artists.</em></h2></div><button className="text-button" onClick={() => navigate("stylists")}>Meet everyone</button></div>
-              {loading ? <div className="loading-state">Finding your artists…</div> : <div className="stylist-grid">{stylists.slice(0, 3).map((stylist) => <StylistCard key={stylist.id} stylist={stylist} onSelect={(item) => { setSelectedStylist(item); navigate("profile"); }} onBook={(item) => goToBooking(null, item)} />)}</div>}
+            <section className="artist-section"><div className="page-width"><div className="section-heading"><div><span className="eyebrow">LOCAL PROFESSIONALS</span><h2>Find an artist</h2></div><button className="text-button" onClick={() => navigate("stylists")}>View all artists <span aria-hidden="true">→</span></button></div>
+              {loading ? <div className="loading-state">Loading local professionals…</div> : <div className="stylist-grid">{stylists.slice(0, 3).map((stylist) => <StylistCard key={stylist.id} stylist={stylist} onSelect={(item) => { setSelectedStylist(item); navigate("profile"); }} onBook={(item) => goToBooking(null, item)} />)}</div>}
             </div></section>
-            <section className="closing-cta page-width"><span className="eyebrow">A LITTLE TIME FOR YOU</span><h2>Your next great<br /><em>hair day starts here.</em></h2><button className="primary-button" onClick={() => navigate("services")}>Find your artist</button></section>
+            <section className="closing-cta page-width"><span className="eyebrow">GET STARTED</span><h2>Know what you’re looking for?</h2><p>Browse services and compare listed prices before you send a booking request.</p><button className="primary-button" onClick={() => navigate("services")}>Browse services</button></section>
           </>
         ) : page === "search" ? (
           <section className="section page-width listing-page">
@@ -1060,7 +1060,7 @@ function App() {
         ) : page === "services" ? (
           <section className="section page-width listing-page"><div className="listing-intro"><span className="eyebrow">THE GOOD STUFF</span><h1>Little rituals.<br /><em>Lovely results.</em></h1><p>From protective styles to soft glam, find the service that feels like you.</p></div>
             <div className="filter-row" aria-label="Filter by service category">{categories.map((item) => <button key={item} className={category === item ? "filter-chip is-selected" : "filter-chip"} onClick={() => setCategory(item)}>{item}</button>)}</div>
-            {loading ? <div className="loading-state">Finding the lovely things…</div> : visibleServices.length ? <div className="service-grid service-grid--listing">{visibleServices.map((service) => <ServiceCard key={service.id} service={service} onBook={(item) => goToBooking(item)} />)}</div> : <p className="empty-state">No services in this category just yet. Try another one.</p>}
+            {loading ? <div className="loading-state">Loading services…</div> : visibleServices.length ? <div className="service-grid service-grid--listing">{visibleServices.map((service) => <ServiceCard key={service.id} service={service} onBook={(item) => goToBooking(item)} />)}</div> : <p className="empty-state">No services in this category just yet. Try another one.</p>}
           </section>
         ) : (
           <section className="section page-width listing-page"><div className="listing-intro"><span className="eyebrow">GOOD HANDS, GOOD ENERGY</span><h1>Your people.<br /><em>Your kind of beauty.</em></h1><p>Meet independent professionals who love what they do—and care about how you feel.</p></div>
@@ -1074,7 +1074,7 @@ function App() {
               <button className="small-button small-button--soft" onClick={findNearbyStylists} disabled={nearbyBusy}>{nearbyBusy ? "Finding nearby…" : "⌖ Find artists near me"}</button>
               {nearbyStylists !== null && <span>Closest first · only artists who opted in to location are shown</span>}
             </div>
-            {loading ? <div className="loading-state">Finding your artists…</div> : filteredStylists.length ? <div className="stylist-grid stylist-grid--listing">{filteredStylists.map((stylist) => <StylistCard key={stylist.id} stylist={stylist} onSelect={(item) => { setSelectedStylist(item); navigate("profile"); }} onBook={(item) => goToBooking(null, item)} />)}</div> : <p className="empty-state">{nearbyStylists !== null ? `No artists with a shared GPS pin were found within ${nearbyRadius} km. Try a larger radius or search by neighbourhood.` : `No artists found${location ? ` near “${location}”` : ""}. Try a different neighbourhood.`}</p>}
+            {loading ? <div className="loading-state">Loading local professionals…</div> : filteredStylists.length ? <div className="stylist-grid stylist-grid--listing">{filteredStylists.map((stylist) => <StylistCard key={stylist.id} stylist={stylist} onSelect={(item) => { setSelectedStylist(item); navigate("profile"); }} onBook={(item) => goToBooking(null, item)} />)}</div> : <p className="empty-state">{nearbyStylists !== null ? `No artists with a shared GPS pin were found within ${nearbyRadius} km. Try a larger radius or search by neighbourhood.` : `No artists found${location ? ` near “${location}”` : ""}. Try a different neighbourhood.`}</p>}
           </section>
         )}
       </main>
