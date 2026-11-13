@@ -349,3 +349,356 @@ a { color: inherit; text-decoration: none; }
   .admin-booking-filters { grid-template-columns: 1fr; }
   .visit-options { flex-wrap: wrap; }
 }
+/* A warmer, more editorial visual language for the marketplace. */
+:root {
+  --ink: #30242b;
+  --muted: #766b70;
+  --rose: #a64e66;
+  --rose-dark: #84394f;
+  --rose-pale: #f7e9ed;
+  --cream: #fcf8f4;
+  --line: #eee3df;
+  --serif: "Iowan Old Style", "Baskerville", "Palatino Linotype", Georgia, serif;
+  color: var(--ink);
+  background: var(--cream);
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 92% 8%, #f7e9e5 0, transparent 26rem),
+    var(--cream);
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  min-height: 82px;
+  border-bottom-color: #eee6e2;
+  background: rgb(255 253 251 / 92%);
+  backdrop-filter: blur(14px);
+}
+
+.brand { font-size: 23px; }
+.brand-mark { box-shadow: 0 5px 14px #84394f30; }
+.main-nav { gap: clamp(20px, 3vw, 40px); }
+.nav-link { font-size: 13px; transition: color .18s ease; }
+.nav-link.is-active { color: var(--rose-dark); }
+.header-cta,
+.primary-button,
+.search-bar button,
+.artist-search button:not(.clear-filter) {
+  border-radius: 999px;
+  transition: background-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+.header-cta,
+.primary-button { padding: 14px 22px; }
+.header-cta:hover,
+.primary-button:hover,
+.search-bar button:hover,
+.artist-search button:not(.clear-filter):hover {
+  box-shadow: 0 8px 18px #84394f2b;
+  transform: translateY(-1px);
+}
+
+.hero {
+  min-height: 610px;
+  grid-template-columns: 1.05fr .95fr;
+  gap: clamp(30px, 5vw, 72px);
+  padding-top: 68px;
+  padding-bottom: 66px;
+  background:
+    radial-gradient(ellipse at 83% 18%, #f2dce0 0, transparent 24rem),
+    linear-gradient(115deg, #fbf3ef 0%, #f8efeb 54%, #f4e5e3 100%);
+}
+
+.hero-content { padding-bottom: 0; }
+.eyebrow { color: var(--rose-dark); letter-spacing: 1.6px; }
+.hero h1,
+.listing-intro h1 {
+  max-width: 650px;
+  margin: 21px 0 18px;
+  font-family: var(--serif);
+  font-size: clamp(48px, 5.7vw, 74px);
+  font-weight: 500;
+  letter-spacing: -2.7px;
+  line-height: .99;
+}
+.hero h1 em,
+h2 em,
+.listing-intro h1 em {
+  color: var(--rose);
+  font-weight: 500;
+  font-style: italic;
+}
+.hero-description { max-width: 420px; color: #695d63; font-size: 15px; }
+.search-bar {
+  min-height: 62px;
+  gap: 5px;
+  margin-top: 27px;
+  padding: 6px 7px 6px 4px;
+  border: 1px solid #eadbd7;
+  border-radius: 999px;
+  box-shadow: 0 12px 30px #422b2112;
+}
+.search-bar input { padding-inline: 8px; }
+.search-bar button {
+  padding: 15px 23px;
+  background: var(--rose-dark);
+}
+.search-pin { padding-inline: 15px 8px; }
+.gps-search-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  padding: 7px 0;
+  transition: color .18s ease;
+}
+.gps-search-button:hover { color: var(--ink); }
+.hero-note { margin-top: 22px; color: #766b70; }
+.hero-photo-wrap {
+  position: relative;
+  width: min(475px, 100%);
+  height: 465px;
+  overflow: visible;
+  border-radius: 48% 48% 18px 18px;
+  background: #e6d2cb;
+  box-shadow: 18px 18px 0 #ead4d0;
+}
+.hero-photo-wrap::after {
+  position: absolute;
+  right: -14px;
+  bottom: 25px;
+  padding: 13px 17px;
+  border: 1px solid #f0dfda;
+  border-radius: 999px;
+  color: var(--rose-dark);
+  background: #fffaf7;
+  box-shadow: 0 8px 24px #422b2118;
+  content: "A little time for you  ✦";
+  font-family: var(--serif);
+  font-size: 14px;
+  font-style: italic;
+}
+.hero-photo { border-radius: inherit; }
+.hero-bottom-note { display: none; }
+
+.trust-strip {
+  min-height: 86px;
+  justify-content: center;
+  gap: clamp(20px, 4vw, 58px);
+  border-bottom-color: #eee5e0;
+  background: #fffdfb;
+}
+.trust-strip span {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #61555b;
+  font-size: 12px;
+}
+.trust-strip span::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c17a89;
+  content: "";
+}
+
+.section { padding-top: 88px; padding-bottom: 90px; }
+.section-heading { margin-bottom: 34px; }
+.section-heading h2 {
+  margin-top: 11px;
+  font-family: var(--serif);
+  font-size: clamp(30px, 3vw, 39px);
+  font-weight: 500;
+  letter-spacing: -.8px;
+}
+.text-button {
+  padding: 10px 0;
+  font-size: 12px;
+  transition: color .18s ease, transform .18s ease;
+}
+.text-button:hover { transform: translateX(2px); }
+.service-grid { gap: 20px; }
+.service-card {
+  min-height: 340px;
+  overflow: hidden;
+  padding: 17px;
+  border: 1px solid #eee5e0;
+  border-radius: 15px;
+  background: #fffdfb;
+  box-shadow: 0 8px 24px #462b1f08;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.service-card:hover {
+  transform: translateY(-5px);
+  border-color: #e5c7ce;
+  box-shadow: 0 16px 34px #462b1f12;
+}
+.service-photo {
+  width: calc(100% + 34px);
+  height: 175px;
+  margin: -17px -17px 17px;
+  transition: transform .35s ease;
+}
+.service-card:hover .service-photo { transform: scale(1.035); }
+.service-category { color: var(--rose-dark); font-size: 9px; font-weight: 700; letter-spacing: 1px; }
+.service-card h3 {
+  margin: 5px 0 8px;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 600;
+}
+.service-card p { color: #766b70; font-size: 12px; }
+.service-card__bottom { padding-top: 21px; }
+.service-card__bottom strong { color: var(--rose-dark); font-size: 14px; }
+.service-card__bottom div span { font-size: 10px; }
+
+.artist-section {
+  padding: 88px 0 92px;
+  background:
+    radial-gradient(ellipse at 10% 100%, #f7e6e9 0, transparent 28rem),
+    #f6efeb;
+}
+.stylist-grid { gap: 20px; }
+.stylist-card {
+  min-height: 132px;
+  gap: 17px;
+  padding: 19px;
+  border: 1px solid #eee2dd;
+  border-radius: 15px;
+  background: rgb(255 253 251 / 90%);
+  box-shadow: 0 8px 24px #462b1f08;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.stylist-card:hover { transform: translateY(-3px); box-shadow: 0 14px 28px #462b1f12; }
+.stylist-avatar { width: 76px; height: 76px; }
+.stylist-card h3 { font-family: var(--serif); font-size: 18px; }
+.stylist-specialty,
+.stylist-location { color: #766b70; font-size: 10px; }
+.stylist-card__footer { margin-top: 8px; }
+.rating { font-size: 11px; }
+
+.closing-cta {
+  position: relative;
+  margin-top: 82px;
+  margin-bottom: 82px;
+  padding: clamp(38px, 6vw, 70px);
+  overflow: hidden;
+  border: 1px solid #ead6d5;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 90% 15%, #efd0d5 0, transparent 18rem),
+    linear-gradient(120deg, #f8e9e7, #fcf4ef);
+}
+.closing-cta h2 {
+  max-width: 580px;
+  margin: 14px 0 10px;
+  font-family: var(--serif);
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 500;
+  letter-spacing: -1px;
+}
+.closing-cta p { max-width: 480px; color: #695d63; font-size: 13px; line-height: 1.7; }
+.closing-cta .primary-button { margin-top: 8px; }
+
+.site-footer {
+  min-height: 120px;
+  padding: 25px max(32px, calc((100% - 1120px) / 2));
+  border-top: 1px solid #eee3df;
+  background: #fffdfb;
+}
+.site-footer p { color: #766b70; }
+.footer-location { color: #a18d93; }
+
+.listing-page { padding-top: 72px; padding-bottom: 100px; }
+.listing-intro { max-width: 720px; margin-bottom: 35px; }
+.listing-intro p { max-width: 500px; color: var(--muted); line-height: 1.7; }
+.filter-chip {
+  border-radius: 999px;
+  transition: color .18s ease, background-color .18s ease, border-color .18s ease;
+}
+.filter-chip.is-active { box-shadow: 0 5px 14px #84394f1c; }
+.artist-search,
+.auth-panel,
+.booking-form,
+.booking-card,
+.empty-panel,
+.review-card,
+.application-card,
+.stat-card {
+  border-color: #eee3df;
+  border-radius: 15px;
+  box-shadow: 0 8px 26px #462b1f08;
+}
+.artist-search { padding: 6px; }
+.artist-search button:not(.clear-filter) { background: var(--rose-dark); }
+.auth-panel { border-radius: 20px; }
+.field-label input,
+.field-label select,
+.field-label textarea,
+.review-form select,
+.review-form textarea,
+.booking-chat__form textarea { border-radius: 9px; }
+.booking-form { border-radius: 18px; }
+.booking-card { border-radius: 15px; }
+.status-badge { border-radius: 999px; }
+.small-button { border-radius: 999px; }
+.small-button--outline { border-color: #e7d8d4; }
+.empty-state,
+.loading-state { border-radius: 14px; }
+
+@media (max-width: 900px) {
+  .hero { min-height: 530px; gap: 28px; }
+  .hero-photo-wrap { height: 390px; }
+  .site-header { min-height: 74px; }
+}
+
+@media (max-width: 620px) {
+  .site-header { min-height: 70px; }
+  .hero {
+    gap: 0;
+    padding: 42px 20px 34px;
+    background:
+      radial-gradient(ellipse at 95% 15%, #f2dce0 0, transparent 17rem),
+      linear-gradient(145deg, #fbf3ef, #f7ece8);
+  }
+  .hero h1 { font-size: clamp(43px, 12vw, 54px); letter-spacing: -1.6px; }
+  .hero-description { max-width: 360px; font-size: 14px; }
+  .search-bar { min-height: 56px; padding: 4px; }
+  .search-bar input { font-size: 11px; }
+  .search-bar button { padding: 13px 17px; }
+  .hero-photo-wrap {
+    height: 255px;
+    margin: 25px 10px 18px 0;
+    border-radius: 48% 48% 14px 14px;
+    box-shadow: 10px 10px 0 #ead4d0;
+  }
+  .hero-photo-wrap::after { right: -8px; bottom: 13px; padding: 10px 13px; font-size: 12px; }
+  .trust-strip { justify-content: flex-start; gap: 14px 20px; padding: 20px; }
+  .trust-strip span { font-size: 10px; }
+  .section { padding-top: 64px; padding-bottom: 68px; }
+  .section-heading h2 { font-size: 29px; }
+  .service-grid { gap: 12px; }
+  .service-card { min-height: 320px; border-radius: 12px; }
+  .service-photo { height: 130px; }
+  .service-card h3 { font-size: 16px; }
+  .service-card p { font-size: 10px; }
+  .artist-section { padding: 64px 0 68px; }
+  .stylist-card { min-height: 0; }
+  .closing-cta { margin-top: 50px; margin-bottom: 56px; border-radius: 17px; }
+  .site-footer { min-height: 130px; }
+  .listing-page { padding-top: 50px; }
+  .listing-intro h1 { font-size: 43px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
